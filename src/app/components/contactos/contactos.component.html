@@ -1,0 +1,51 @@
+<h1>Contactos</h1>
+<hr>
+<div class="row mb-3">
+  <div class="col-md-12 text-right">
+    <a class="btn btn-outline-primary " [routerLink]="['/contacto', 'nuevo']" routerLinkActive="" role="button">
+      Agregar
+      <i class="fas fa-plus-circle"></i>
+    </a>
+  </div>
+</div>
+<div class="row animated fadeIn slow">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="!loading">
+          <tr *ngFor="let k of contactos | keys ; let i=index">
+            <th scope="row"><i class="material-icons">
+                perm_contact_calendar
+              </i></th>
+            <td>{{ contactos[k].nombre }}</td>
+            <td><i class="material-icons mx-2">phone</i>{{ contactos[k].telefono }}</td>
+            <td>
+              <button [routerLink]="['/contacto', k]" type="button" name="" id=""
+                class="btn btn-outline-success mx-2"><i class="fas fa-user-edit"></i></button>
+              <button (click)="deleteContacto(k)" type="button" name="" id="" class="btn btn-outline-danger mx-2"><i
+                  class="fas fa-trash-alt"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="(contactos | keys).length==0 && !loading" class="alert alert-warning   text-center" role="alert">
+        <strong>No hay registros que mostrar</strong>
+      </div>
+
+      <div *ngIf="loading" class="text-center">
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
